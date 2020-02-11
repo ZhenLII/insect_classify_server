@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.InsectClassMapper">
+
+	<resultMap type="com.example.demo.entity.InsectClass"
+		id="insectClassRes">
+		<result column="class_id" jdbcType="INTEGER" property="classId" />
+		<result column="class_name" jdbcType="VARCHAR" property="className" />
+	</resultMap>
+
+	<insert id="insertClass"
+		parameterType="com.example.demo.entity.InsectClass"
+		keyProperty="insectClass.classId" useGeneratedKeys="true">
+		insert into
+		insect_class(class_name) values(#{insectClass.className})
+	</insert>
+
+	<select id="getInsectClassByName" resultMap="insectClassRes">
+		select * from
+		insect_class where class_name = #{insectClass.className}
+	</select>
+</mapper>

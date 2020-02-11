@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.InsectMapper">
+
+	<resultMap id="insectsRes"
+		type="com.example.demo.entity.Insect">
+		<result column="insect_id" jdbcType="INTEGER"
+			property="insectId" />
+		<result column="class_id" jdbcType="INTEGER" property="classId" />
+		<result column="insect_name" jdbcType="VARCHAR"
+			property="insectName" />
+		<result column="scientific_name" jdbcType="VARCHAR"
+			property="scientificName" />
+		<result column="insect_alias" jdbcType="VARCHAR"
+			property="insectAlias" />
+		<result column="class_name" jdbcType="VARCHAR"
+			property="className" />
+		<result column="description" jdbcType="VARCHAR"
+			property="description" />
+		<result column="html" jdbcType="VARCHAR" property="html" />
+		<result column="pic" jdbcType="VARCHAR" property="pic" />
+	</resultMap>
+
+	<select id="getList" resultMap="insectsRes">
+		select * from insects ins left join insect_class inc on ins.class_id =
+		inc.class_id
+		<if test="query.length() > 0">
+			<where>
+				or insect_name like concat('%',#{query},'%')
+				or insect_alias
+				like concat('%',#{query},'%')
+			</where>
+		</if>
+		limit #{offset},#{limit}
+	</select>
+
+	<insert id="insertInsect"
+		parameterType="com.example.demo.entity.Insect"
+		keyProperty="insect.insectId" useGeneratedKeys="true">
+		insert into
+		insects(insect_name, insect_alias, scientific_name, class_id,
+		description, pic, `order`, family, genus)
+		values(#{insect.insectName},
+		#{insect.insectAlias}, #{insect.scientificName}, #{insect.classId},
+		#{insect.description}, #{insect.pic}, #{insect.order},
+		#{insect.family}, #{insect.genus})
+	</insert>
+
+	<select id="getInsectById" resultMap="insectsRes">
+		select * from insects ins left join insect_class inc on ins.class_id = inc.class_id
+		<where>
+			insect_id = #{insectId}
+		</where>
+	</select>
+</mapper>
