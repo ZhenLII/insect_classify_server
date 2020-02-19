@@ -17,7 +17,7 @@
 			property="className" />
 		<result column="description" jdbcType="VARCHAR"
 			property="description" />
-		<result column="html" jdbcType="VARCHAR" property="html" />
+		<result column="feature" jdbcType="VARCHAR" property="feature" />
 		<result column="pic" jdbcType="VARCHAR" property="pic" />
 	</resultMap>
 
@@ -39,11 +39,11 @@
 		keyProperty="insect.insectId" useGeneratedKeys="true">
 		insert into
 		insects(insect_name, insect_alias, scientific_name, class_id,
-		description, pic, `order`, family, genus)
+		description, pic, `order`, family, genus, feature)
 		values(#{insect.insectName},
 		#{insect.insectAlias}, #{insect.scientificName}, #{insect.classId},
 		#{insect.description}, #{insect.pic}, #{insect.order},
-		#{insect.family}, #{insect.genus})
+		#{insect.family}, #{insect.genus}, #{insect.feature})
 	</insert>
 
 	<select id="getInsectById" resultMap="insectsRes">

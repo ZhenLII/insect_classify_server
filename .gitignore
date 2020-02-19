@@ -1,5 +1,7 @@
 HELP.md
 target/
+classes/
+/classes
 /out
 out/
 mvnw

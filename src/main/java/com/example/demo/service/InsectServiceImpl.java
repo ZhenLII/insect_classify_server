@@ -68,14 +68,14 @@ public class InsectServiceImpl implements InsectService {
             // 设置文件存储路径
 
             // 调试环境 获取路径
-			String url = ResourceUtils.getURL("classpath:").getPath();
-			url = url.substring(1,url.length());
-            path = url+uploadPath + fileName;
+//			String url = ResourceUtils.getURL("classpath:").getPath();
+//			url = url.substring(1,url.length());
+//            path = url+uploadPath + fileName;
 
 
 			// 部署为jar后直接采取相对路径
-//            path = basePath+uploadPath + fileName;
-//            path = path.replaceAll("\\\\","/");
+            path = basePath+uploadPath + fileName;
+            path = path.replaceAll("\\\\","/");
             File dest = new File(path);
             // 检测是否存在目录
             if (!dest.getParentFile().exists()) {
@@ -184,12 +184,12 @@ public class InsectServiceImpl implements InsectService {
 
 		try{
 		    // 开发环境
-            String url = ResourceUtils.getURL("classpath:").getPath();
-            url = url.substring(1, url.length());
+//            String url = ResourceUtils.getURL("classpath:").getPath();
+//            url = url.substring(1, url.length());
 
             // 部署jar
-//            String url = basePath;
-//            url = url.replaceAll("\\\\","/");
+            String url = basePath;
+            url = url.replaceAll("\\\\","/");
             String[] arguments = new String[] {pythonCmd,url.concat(pythonPath).concat("classify.py"), filePath, url.concat(pythonPath)};
             Process process = Runtime.getRuntime().exec(arguments);
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream(), pythonRuntimeCharset));
@@ -224,10 +224,10 @@ public class InsectServiceImpl implements InsectService {
 		String pic = insect.getPic();
 		try {
 		    // 开发环境
-			String url = ResourceUtils.getURL("classpath:").getPath();
+//			String url = ResourceUtils.getURL("classpath:").getPath();
 
             //部署jar
-//			String url = basePath;
+			String url = basePath;
 
 			File file=new File(url.concat("/static/").concat(pic));
 			File[] fileName= file.listFiles(pathname -> {

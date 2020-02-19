@@ -12,7 +12,7 @@ public class Insect {
 	private String family;
 	private String genus;
 	private String description;
-	private String html;
+	private String feature;
 	private String pic;
 	
 	public int getInsectId() {
@@ -77,11 +77,11 @@ public class Insect {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getHtml() {
-		return html;
+	public String getFeature() {
+		return feature;
 	}
-	public void setHtml(String html) {
-		this.html = html;
+	public void setFeature(String feature) {
+		this.feature = feature;
 	}
 	public String getPic() {
 		return pic;
